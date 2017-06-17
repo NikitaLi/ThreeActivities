@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -22,21 +23,17 @@ public class Activity3 extends AppCompatActivity implements View.OnClickListener
         image = (ImageView) findViewById(R.id.img3);
         spinner = (Spinner) findViewById(R.id.spinner);
 
+        final String[] scaleTypeVariants = getResources().getStringArray(R.array.scale_type_variants);
+
+        ArrayAdapter<?> adapter =
+                ArrayAdapter.createFromResource(this, R.array.scale_type_variants, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String[] choose = getResources().getStringArray(R.array.spinner_entries);
-                switch (choose[i]) {
-                    case "CENTER":
-                        image.setScaleType(ImageView.ScaleType.CENTER);
-                        break;
-                    case "FIT_END":
-                        image.setScaleType(ImageView.ScaleType.FIT_END);
-                        break;
-                    case "FIT_START":
-                        image.setScaleType(ImageView.ScaleType.FIT_START);
-                        break;
-                }
+                image.setScaleType(ImageView.ScaleType.valueOf(scaleTypeVariants[i]));
             }
 
             @Override

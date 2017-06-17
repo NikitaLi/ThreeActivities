@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class Activity2 extends AppCompatActivity implements View.OnClickListener{
@@ -22,20 +23,20 @@ public class Activity2 extends AppCompatActivity implements View.OnClickListener
 
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
+        final String[] scaleTypeVariants = getResources().getStringArray(R.array.scale_type_variants);
+        int id = 0;
+        for (String variant: scaleTypeVariants) {
+            RadioButton rb = new RadioButton(this);
+            rb.setId(id);
+            rb.setText(variant);
+            radioGroup.addView(rb);
+            id++;
+        }
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, @IdRes int checkedId) {
-                switch (checkedId) {
-                    case R.id.radio_1:
-                        image.setScaleType(ImageView.ScaleType.CENTER);
-                        break;
-                    case R.id.radio_2:
-                        image.setScaleType(ImageView.ScaleType.FIT_END);
-                        break;
-                    case R.id.radio_3:
-                        image.setScaleType(ImageView.ScaleType.FIT_START);
-                        break;
-                }
+                image.setScaleType(ImageView.ScaleType.valueOf(scaleTypeVariants[checkedId]));
             }
         });
 

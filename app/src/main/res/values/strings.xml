@@ -10,9 +10,9 @@
     <string name="scale_type_fit_end">FIT_END</string>
     <string name="scale_type_fit_start">FIT_START</string>
 
-    <string-array name="spinner_entries">
-        <item>CENTER</item>
+    <string-array name="scale_type_variants">
         <item>FIT_END</item>
         <item>FIT_START</item>
+        <item>CENTER_INSIDE</item>
     </string-array>
 </resources>
